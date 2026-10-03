@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masood Bibani | Personal Portfolio</title>
+    <meta name="description" content="Personal website of Masood Ahmed, aka Masood Bibani.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fffcf2',
+                            100: '#fff8e1',
+                            400: '#facc15',
+                            500: '#F9B233', // Kurdish Sun Yellow
+                            600: '#eab308',
+                            900: '#713f12',
+                        },
+                        kurdish: {
+                            red: '#ED2024',
+                            green: '#278E43',
+                            yellow: '#F9B233'
+                        },
+                        dark: {
+                            bg: '#0a120d', // Deep forest/olive black
+                            card: '#111f16',
+                            border: '#1b3323'
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a120d;
+            color: #f8fafc;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a120d; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1b3323; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F9B233; 
+        }
+
+        .glass-nav {
+            background: rgba(10, 18, 13, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer">
+                    <a href="#home" class="font-heading text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                        <span class="bg-[#278E43] text-white w-10 h-10 rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(39,142,67,0.4)]">M</span>
+                        asood<span class="text-brand-400">Bibani</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-brand-400 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                        <a href="#about" class="text-gray-300 hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#projects" class="text-gray-300 hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Projects</a>
+                        <a href="#services" class="text-gray-300 hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Expertise</a>
+                        <a href="#experience" class="text-gray-300 hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Experience</a>
+                        <a href="#contact" class="bg-brand-500 hover:bg-brand-400 text-gray-900 px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg shadow-brand-500/30">Let's Talk</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-card border-t border-dark-border">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#projects" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#services" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Expertise</a>
+                <a href="#experience" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Experience</a>
+                <a href="#contact" class="text-brand-400 hover:text-brand-300 block px-3 py-2 rounded-md text-base font-medium">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+            <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-[#ED2024] rounded-full mix-blend-multiply filter blur-[128px] opacity-40 animate-blob"></div>
+            <div class="absolute top-1/3 right-1/4 w-72 h-72 bg-[#F9B233] rounded-full mix-blend-multiply filter blur-[128px] opacity-30 animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-1/4 left-1/2 w-72 h-72 bg-[#278E43] rounded-full mix-blend-multiply filter blur-[128px] opacity-30 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                
+                <!-- Hero Text -->
+                <div class="w-full lg:w-1/2 text-center lg:text-left">
+                    <p class="text-brand-400 font-medium tracking-wide uppercase mb-3 animate-fade-in-up" style="animation-delay: 0.1s;">Hello, I am</p>
+                    <h1 class="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 animate-fade-in-up" style="animation-delay: 0.2s;">
+                        Masood <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-[#ED2024]">Ahmed</span>
+                    </h1>
+                    <h2 class="text-xl sm:text-2xl text-gray-400 mb-6 font-light animate-fade-in-up" style="animation-delay: 0.3s;">
+                        Known as <span class="text-white font-medium">Masood Bibani</span>
+                    </h2>
+                    
+                    <div class="h-8 mb-8 animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <p class="text-lg text-gray-400 flex items-center justify-center lg:justify-start gap-2">
+                            I am an <span id="typewriter" class="text-brand-400 font-semibold border-r-2 border-brand-400 pr-1"></span>
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 animate-fade-in-up" style="animation-delay: 0.5s;">
+                        <a href="#projects" class="px-8 py-3.5 rounded-full bg-brand-500 hover:bg-brand-400 text-gray-900 font-bold transition-all shadow-[0_0_20px_rgba(249,178,51,0.4)] hover:shadow-[0_0_30px_rgba(249,178,51,0.6)]">
+                            View My Projects
+                        </a>
+                        <a href="#contact" class="px-8 py-3.5 rounded-full border border-dark-border hover:border-[#278E43] hover:bg-[#278E43]/10 text-white font-medium transition-all">
+                            Contact Me
+                        </a>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="flex items-center justify-center lg:justify-start gap-5 mt-10 animate-fade-in-up" style="animation-delay: 0.6s;">
+                        <a href="https://www.linkedin.com/in/masoudahmed" target="_blank" class="w-10 h-10 rounded-full bg-dark-card border border-dark-border flex items-center justify-center text-gray-400 hover:text-brand-400 hover:border-brand-400 transition-all transform hover:-translate-y-1"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:masoud.mo.ahmed@gmail.com" class="w-10 h-10 rounded-full bg-dark-card border border-dark-border flex items-center justify-center text-gray-400 hover:text-brand-400 hover:border-brand-400 transition-all transform hover:-translate-y-1"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="w-full lg:w-1/2 flex justify-center mt-12 lg:mt-0 animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="relative w-72 h-72 sm:w-96 sm:h-96">
+                        <!-- Decorative border -->
+                        <div class="absolute inset-0 rounded-full border-2 border-brand-500/30 animate-[spin_10s_linear_infinite]"></div>
+                        <div class="absolute inset-4 rounded-full border-2 border-dashed border-[#278E43]/40 animate-[spin_15s_linear_infinite_reverse]"></div>
+                        
+                        <!-- Image Container -->
+                        <div class="absolute inset-8 rounded-full overflow-hidden bg-dark-card border-4 border-dark-bg shadow-2xl">
+                            <!-- Placeholder Image: Replace src with actual photo of Masood -->
+                            <img src="https://placehold.co/600x600/111f16/F9B233?text=MB" alt="Masood Bibani" class="w-full h-full object-cover">
+                        </div>
+                        
+                        <!-- Floating Badges -->
+                        <div class="absolute top-10 -left-6 bg-dark-card p-3 rounded-2xl shadow-xl border border-dark-border flex items-center gap-3 animate-[bounce_3s_infinite]">
+                            <div class="text-[#F9B233] text-xl"><i class="fas fa-brain"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-400">Expertise</p>
+                                <p class="font-bold text-white">AI & Blockchain</p>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute bottom-10 -right-6 bg-dark-card p-3 rounded-2xl shadow-xl border border-dark-border flex items-center gap-3 animate-[bounce_4s_infinite_reverse]">
+                            <div class="text-[#278E43] text-xl"><i class="fas fa-globe"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-400">Industry Reach</p>
+                                <p class="font-bold text-white">Auto & Telecom</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-dark-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-brand-400 font-medium tracking-wide uppercase mb-2">Discover</h2>
+                <h3 class="font-heading text-3xl md:text-4xl font-bold text-white">About Me</h3>
+                <div class="w-20 h-1 bg-[#278E43] mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="w-full lg:w-5/12">
+                    <div class="relative rounded-2xl overflow-hidden group border border-dark-border">
+                        <div class="absolute inset-0 bg-brand-500/20 group-hover:bg-transparent transition-all duration-500 z-10"></div>
+                        <img src="https://placehold.co/800x1000/111f16/F9B233?text=Masood+Bibani" alt="About Masood" class="w-full h-auto rounded-2xl transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+                
+                <div class="w-full lg:w-7/12 lg:pl-10">
+                    <h4 class="text-2xl font-heading font-semibold text-white mb-4">AI Enthusiast & HR Leader bridging the gap between talent and technology.</h4>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Hello! I am Masood Ahmed, proudly known as Masood Bibani. Based in Erbil, I currently serve as a Country HR & Admin Manager for a leading multinational corporation in the automotive sector. With over a decade of progressive leadership experience across the telecommunications and automotive industries, I specialize in designing and executing robust, future-proof organizational strategies.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        My true passion lies at the intersection of human potential and technological innovation. Armed with an EMBA in Artificial Intelligence & Blockchain, I leverage data-driven insights to revolutionize talent acquisition, compensation models, and overall employee engagement. I believe the future of HR is digital, and I am actively building it.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-dark-card border border-[#ED2024]/50 flex items-center justify-center text-[#ED2024] flex-shrink-0">
+                                <i class="fas fa-microchip text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-medium mb-1">AI Integration</h5>
+                                <p class="text-sm text-gray-400">Pioneering AI solutions for HR processes and workforce automation.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-dark-card border border-[#278E43]/50 flex items-center justify-center text-[#278E43] flex-shrink-0">
+                                <i class="fas fa-project-diagram text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-medium mb-1">Digital Ecosystems</h5>
+                                <p class="text-sm text-gray-400">Architecting innovative platforms for business and talent management.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="inline-flex items-center gap-2 text-brand-400 font-medium hover:text-brand-300 transition-colors group">
+                        Let's collaborate on your next project 
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-2 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-dark-card border-t border-dark-border relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-[#278E43] font-medium tracking-wide uppercase mb-2">My Initiatives</h2>
+                <h3 class="font-heading text-3xl md:text-4xl font-bold text-white">Digital Projects</h3>
+                <div class="w-20 h-1 bg-[#ED2024] mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-dark-bg p-8 rounded-2xl border border-dark-border hover:border-brand-500/50 transition-all group hover:-translate-y-2 duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#278E43] rounded-full mix-blend-multiply filter blur-[50px] opacity-20"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-2xl font-heading font-bold text-white group-hover:text-brand-400 transition-colors">IQAutoJobs.com</h4>
+                        <i class="fas fa-external-link-alt text-gray-500 group-hover:text-brand-400 transition-colors"></i>
+                    </div>
+                    <p class="text-brand-500 text-sm font-medium mb-4">Automotive Recruitment Platform</p>
+                    <p class="text-gray-400 leading-relaxed">
+                        A specialized job portal tailored for the Iraqi automotive industry. Designed to connect top-tier talent with leading dealerships and automotive service centers, streamlining the recruitment process using modern matching algorithms.
+                    </p>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-dark-bg p-8 rounded-2xl border border-dark-border hover:border-brand-500/50 transition-all group hover:-translate-y-2 duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#ED2024] rounded-full mix-blend-multiply filter blur-[50px] opacity-20"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-2xl font-heading font-bold text-white group-hover:text-brand-400 transition-colors">IQAutoHR.com</h4>
+                        <i class="fas fa-external-link-alt text-gray-500 group-hover:text-brand-400 transition-colors"></i>
+                    </div>
+                    <p class="text-brand-500 text-sm font-medium mb-4">HR Solutions Hub</p>
+                    <p class="text-gray-400 leading-relaxed">
+                        A comprehensive digital ecosystem providing specialized Human Resources tools, policies, and consulting services tailored specifically for the unique demands and scale of the automotive business sector.
+                    </p>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-dark-bg p-8 rounded-2xl border border-dark-border hover:border-brand-500/50 transition-all group hover:-translate-y-2 duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#F9B233] rounded-full mix-blend-multiply filter blur-[50px] opacity-20"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-2xl font-heading font-bold text-white group-hover:text-brand-400 transition-colors">IQAutoMarket.com</h4>
+                        <i class="fas fa-external-link-alt text-gray-500 group-hover:text-brand-400 transition-colors"></i>
+                    </div>
+                    <p class="text-brand-500 text-sm font-medium mb-4">Digital Automotive Marketplace</p>
+                    <p class="text-gray-400 leading-relaxed">
+                        An innovative digital marketplace designed to revolutionize how vehicles and automotive parts are traded, integrating smart analytics to monitor market trends and enhance user experience.
+                    </p>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="bg-dark-bg p-8 rounded-2xl border border-dark-border hover:border-brand-500/50 transition-all group hover:-translate-y-2 duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-600 rounded-full mix-blend-multiply filter blur-[50px] opacity-20"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-2xl font-heading font-bold text-white group-hover:text-brand-400 transition-colors">IQSalaryScale.com</h4>
+                        <i class="fas fa-external-link-alt text-gray-500 group-hover:text-brand-400 transition-colors"></i>
+                    </div>
+                    <p class="text-brand-500 text-sm font-medium mb-4">Compensation & Benefits Analytics</p>
+                    <p class="text-gray-400 leading-relaxed">
+                        A data-driven platform providing accurate salary benchmarking, compensation analytics, and reward strategies to help organizations remain competitive in the regional talent market.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-dark-bg border-t border-dark-border relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-brand-400 font-medium tracking-wide uppercase mb-2">What I Do</h2>
+                <h3 class="font-heading text-3xl md:text-4xl font-bold text-white">Core Expertise</h3>
+                <div class="w-20 h-1 bg-[#278E43] mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-dark-card p-8 rounded-2xl border border-dark-border hover:border-brand-500/50 transition-colors group hover:-translate-y-2 duration-300">
+                    <div class="w-14 h-14 rounded-xl bg-[#ED2024]/10 flex items-center justify-center text-[#ED2024] text-2xl mb-6 group-hover:bg-[#ED2024] group-hover:text-white transition-colors">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h4 class="text-xl font-heading font-semibold text-white mb-3">AI & Digital HR</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Leveraging Artificial Intelligence and blockchain principles to automate HR processes, analyze talent data, and drive forward-thinking digital transformation strategies.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-dark-card p-8 rounded-2xl border border-dark-border hover:border-brand-500/50 transition-colors group hover:-translate-y-2 duration-300">
+                    <div class="w-14 h-14 rounded-xl bg-[#278E43]/10 flex items-center justify-center text-[#278E43] text-2xl mb-6 group-hover:bg-[#278E43] group-hover:text-white transition-colors">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h4 class="text-xl font-heading font-semibold text-white mb-3">Strategic Talent Management</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Leading workforce planning, recruitment, performance appraisals, and designing data-backed compensation & benefits programs.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-dark-card p-8 rounded-2xl border border-dark-border hover:border-brand-500/50 transition-colors group hover:-translate-y-2 duration-300">
+                    <div class="w-14 h-14 rounded-xl bg-[#F9B233]/10 flex items-center justify-center text-[#F9B233] text-2xl mb-6 group-hover:bg-[#F9B233] group-hover:text-white transition-colors">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h4 class="text-xl font-heading font-semibold text-white mb-3">Product & Operations</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Extensive experience managing complex product lifecycles, optimizing administrative operations, and assessing new business opportunities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 bg-dark-card border-t border-dark-border relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-[#ED2024] font-medium tracking-wide uppercase mb-2">My Journey</h2>
+                    <h3 class="font-heading text-3xl md:text-4xl font-bold text-white">Experience & Education</h3>
+                    <div class="w-20 h-1 bg-brand-500 mt-4 rounded-full"></div>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="https://www.linkedin.com/in/masoudahmed" target="_blank" class="text-white hover:text-brand-400 font-medium transition-colors">View Full LinkedIn Profile <i class="fas fa-external-link-alt ml-2"></i></a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Experience Column -->
+                <div class="space-y-6">
+                    <h4 class="text-2xl font-heading font-semibold text-white mb-6 flex items-center gap-3"><i class="fas fa-briefcase text-[#F9B233]"></i> Work Experience</h4>
+                    
+                    <!-- Job 1 -->
+                    <div class="bg-dark-bg p-6 rounded-2xl border border-dark-border hover:border-[#278E43]/50 transition-colors">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h5 class="text-lg font-bold text-white">Country HR & Admin Manager</h5>
+                                <p class="text-brand-400 font-medium text-sm">Leading Automotive Corporation</p>
+                            </div>
+                            <span class="bg-[#278E43]/20 text-[#278E43] text-xs px-3 py-1 rounded-full border border-[#278E43]/30 whitespace-nowrap">Sep 2025 - Present</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-3">Developing country-level HR policies, leading workforce planning, and driving digital transformation & automation of HR processes.</p>
+                    </div>
+
+                    <!-- Job 2 -->
+                    <div class="bg-dark-bg p-6 rounded-2xl border border-dark-border hover:border-[#278E43]/50 transition-colors">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h5 class="text-lg font-bold text-white">Human Resources Manager</h5>
+                                <p class="text-gray-300 font-medium text-sm">Premium Automotive Brand</p>
+                            </div>
+                            <span class="bg-dark-card text-gray-300 text-xs px-3 py-1 rounded-full border border-dark-border whitespace-nowrap">Apr 2021 - Sep 2025</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-3">Partnered with leadership to execute talent strategy, managed talent acquisition, and oversaw data-driven compensation analysis.</p>
+                    </div>
+
+                    <!-- Job 3 -->
+                    <div class="bg-dark-bg p-6 rounded-2xl border border-dark-border hover:border-[#278E43]/50 transition-colors">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h5 class="text-lg font-bold text-white">Product & Compensation Manager</h5>
+                                <p class="text-gray-300 font-medium text-sm">Major Telecommunications Provider</p>
+                            </div>
+                            <span class="bg-dark-card text-gray-300 text-xs px-3 py-1 rounded-full border border-dark-border whitespace-nowrap">Jul 2011 - Sep 2020</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-3">Designed product strategy roadmaps, assessed business opportunities, and maintained complex HRIS data systems and reward policies.</p>
+                    </div>
+                </div>
+
+                <!-- Education & Certs Column -->
+                <div class="space-y-6 mt-12 lg:mt-0">
+                    <h4 class="text-2xl font-heading font-semibold text-white mb-6 flex items-center gap-3"><i class="fas fa-graduation-cap text-[#F9B233]"></i> Education & Certifications</h4>
+                    
+                    <!-- Edu 1 (Highlighted for AI) -->
+                    <div class="bg-gradient-to-br from-dark-bg to-[#112217] p-6 rounded-2xl border border-[#ED2024]/40 hover:border-[#ED2024] transition-colors relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 text-[#ED2024]/10 text-6xl"><i class="fas fa-brain"></i></div>
+                        <div class="flex justify-between items-start mb-2 relative z-10">
+                            <div>
+                                <h5 class="text-lg font-bold text-white">EMBA, Artificial Intelligence & Blockchain</h5>
+                                <p class="text-brand-400 font-medium text-sm">Guglielmo Marconi University</p>
+                            </div>
+                            <span class="bg-[#ED2024]/20 text-[#ED2024] text-xs px-3 py-1 rounded-full border border-[#ED2024]/30 whitespace-nowrap">2023 - 2024</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-3 relative z-10">Focused on leveraging Artificial Intelligence and distributed ledger technologies to innovate corporate HR practices.</p>
+                    </div>
+
+                    <!-- Edu 2 -->
+                    <div class="bg-dark-bg p-6 rounded-2xl border border-dark-border hover:border-brand-500/50 transition-colors">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h5 class="text-lg font-bold text-white">Master's Degree, Business Management</h5>
+                                <p class="text-gray-300 font-medium text-sm">University of Kurdistan Hewlêr (UKH)</p>
+                            </div>
+                            <span class="bg-dark-card text-gray-300 text-xs px-3 py-1 rounded-full border border-dark-border whitespace-nowrap">2013 - 2015</span>
+                        </div>
+                    </div>
+
+                    <!-- Certifications -->
+                    <div class="bg-dark-bg p-6 rounded-2xl border border-dark-border mt-6">
+                        <h5 class="text-lg font-bold text-white mb-4">Key Certifications</h5>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-dark-card border border-[#278E43]/30 text-white text-sm px-3 py-1.5 rounded-lg flex items-center gap-2"><i class="fas fa-certificate text-[#278E43]"></i> Manager as Coach</span>
+                            <span class="bg-dark-card border border-[#278E43]/30 text-white text-sm px-3 py-1.5 rounded-lg flex items-center gap-2"><i class="fas fa-certificate text-[#278E43]"></i> Chartered Manager</span>
+                            <span class="bg-dark-card border border-[#F9B233]/30 text-white text-sm px-3 py-1.5 rounded-lg flex items-center gap-2"><i class="fas fa-certificate text-[#F9B233]"></i> CIQ Level 7</span>
+                            <span class="bg-dark-card border border-[#ED2024]/30 text-white text-sm px-3 py-1.5 rounded-lg flex items-center gap-2"><i class="fas fa-certificate text-[#ED2024]"></i> Sustainable Employee Engagement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-dark-card border-t border-dark-border relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-brand-400 font-medium tracking-wide uppercase mb-2">Get In Touch</h2>
+                <h3 class="font-heading text-3xl md:text-4xl font-bold text-white">Contact Me</h3>
+                <div class="w-20 h-1 bg-brand-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-2xl font-heading font-semibold text-white mb-6">Let's build something awesome together.</h4>
+                    <p class="text-gray-400 mb-8">
+                        I am currently open to new opportunities and projects. Whether you have a question, a proposal, or just want to say hi, I'll try my best to get back to you!
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-brand-400">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 uppercase tracking-wide">Email</p>
+                                <a href="mailto:masoud.mo.ahmed@gmail.com" class="text-white font-medium hover:text-brand-400 transition-colors">masoud.mo.ahmed@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-brand-400">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 uppercase tracking-wide">LinkedIn</p>
+                                <a href="https://www.linkedin.com/in/masoudahmed" target="_blank" class="text-white font-medium hover:text-brand-400 transition-colors">in/masoudahmed</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-brand-400">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 uppercase tracking-wide">Location</p>
+                                <p class="text-white font-medium">Erbil Governorate, Iraq</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-dark-bg p-8 rounded-2xl border border-dark-border">
+                    <form onsubmit="event.preventDefault(); alert('This is a demo. Please connect a backend service (like Formspree) to receive emails.');">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full bg-dark-card border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors" placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Your Email</label>
+                                <input type="email" id="email" class="w-full bg-dark-card border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="subject" class="block text-sm font-medium text-gray-400 mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full bg-dark-card border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors" placeholder="Project Inquiry" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                            <textarea id="message" rows="4" class="w-full bg-dark-card border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors resize-none" placeholder="How can I help you?" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-lg shadow-brand-500/30">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-bg border-t border-dark-border py-10 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <a href="#home" class="font-heading text-2xl font-bold tracking-tight text-white inline-flex items-center gap-2 mb-6">
+                <span class="bg-[#278E43] text-white w-8 h-8 rounded-lg flex items-center justify-center text-sm shadow-[0_0_10px_rgba(39,142,67,0.4)]">M</span>
+                asood<span class="text-brand-400">Bibani</span>
+            </a>
+            
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="https://www.linkedin.com/in/masoudahmed" target="_blank" class="text-gray-500 hover:text-brand-400 transition-colors text-xl"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:masoud.mo.ahmed@gmail.com" class="text-gray-500 hover:text-brand-400 transition-colors text-xl"><i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <p class="text-gray-600 text-sm">
+                &copy; <span id="year"></span> Masood Ahmed (Masood Bibani). All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Navbar blur on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+
+        // Typewriter effect
+        const roles = ["AI-Driven HR Leader.", "Digital Ecosystem Architect.", "Platform Innovator.", "Chartered Manager."];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeWriterElement = document.getElementById("typewriter");
+
+        function typeWriter() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typeWriterElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeWriterElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = 100;
+            if (isDeleting) { typeSpeed /= 2; }
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2000; // Pause at end of word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 500; // Pause before starting next word
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+
+        // Start typing effect on load
+        window.onload = function() {
+            if(typeWriterElement) {
+                typeWriter();
+            }
+        };
+
+        // Scroll Reveal Animation using Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+        
+    </script>
+</body>
+</html>
